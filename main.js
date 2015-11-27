@@ -21,28 +21,9 @@ var frenchBoard = Immutable.fromJS([
     [NONE, PIECE, PIECE, PIECE, PIECE, PIECE, NONE],
     [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
 ]);
-// var easyBoard = Immutable.fromJS([
-//     [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
-//     [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
-//     [EMPTY, EMPTY, PIECE, PIECE, PIECE, EMPTY, EMPTY],
-//     [EMPTY, EMPTY, PIECE, EMPTY, PIECE, EMPTY, EMPTY],
-//     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-//     [NONE, NONE, EMPTY, EMPTY, EMPTY, NONE, NONE],
-//     [NONE, NONE, EMPTY, EMPTY, EMPTY, NONE, NONE],
-// ]);
-// var smallBoard = Immutable.fromJS([
-//     // [EMPTY, PIECE, PIECE]
-//     [PIECE, PIECE, EMPTY]
-// ]);
 var gameStatus = frenchBoard;
 gameStatus = dig(gameStatus, 3, 3);
-// console.log(showBoard(gameStatus));
 console.log(solve(gameStatus, getPieces(gameStatus)));
-// turn.reverse();
-// for(var i = 0; i < turn.length;i++){
-//     gameStatus = move(gameStatus, turn[i][0], turn[i][1], turn[i][2]);
-//     console.log(showBoard(gameStatus));
-// }
 function solve(board, piece) {
     if (piece === 1) {
         console.log(showBoard(board));
