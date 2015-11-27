@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style>
+          .none {
+            background: black;
+          }
+          .piece {
+            background: #dd0;
+          }
+          .empty {
+            background: #fff;
+          }
+          td {
+            border: 1px solid #888;
+            width:20px;
+            height:20px;
+          }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>
+          $(function() {
+            var NONE = 0, PIECE = 1, EMPTY = 2;
+            var className = ['none', 'piece', 'empty'];
+            var mode = PIECE;
+            var board = [
+              [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
+              [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
+              [PIECE, PIECE, PIECE, PIECE, PIECE, PIECE, PIECE],
+              [PIECE, PIECE, PIECE, PIECE, PIECE, PIECE, PIECE],
+              [PIECE, PIECE, PIECE, PIECE, PIECE, PIECE, PIECE],
+              [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
+              [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
+            ];
+            for (var i = 0, _i = board.length; i < _i; i++) {
+              for (var j = 0, _j = board[i].length; j < _j; j++) {
+                $('tr').eq(i).find('td').eq(j).attr('class', className[board[i][j]]);
+              }
+            }
+            $('table').on('click', 'td', function(e) {
+              $(e.target).attr('class', className[mode]);
+            });
+            $('#code').on('click', function() {
+              var res = [];
+              for (var i = 0, _i = board.length; i < _i; i++) {
+                res[i] = [];
+                for (var j = 0, _j = board[i].length; j < _j; j++) {
+                  res[i][j] = $('tr').eq(i).find('td').eq(j).attr('class').toUpperCase();
+                }
+              }
+              $('#result').val(JSON.stringify(res).replace(/"/g,'').replace(/,/g,', '));
+            });
+            $(window).on('keydown', function(e) {
+              var E = 69, N = 78, P = 80;
+              if (e.keyCode === E) {
+                mode = EMPTY;
+              }
+              if (e.keyCode === N) {
+                mode = NONE;
+              }
+              if (e.keyCode === P) {
+                mode = PIECE;
+              }
+            });
+          });
+        </script>
+    </head>
+    <body>
+    <table>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <button id="code">CODE</button>
+    <textarea id="result"></textarea>
+    </body>
+</html>
