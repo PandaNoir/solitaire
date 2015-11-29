@@ -31,17 +31,20 @@ function solve(board, piece) {
     var status = board;
     for (var i = 0, _i = board.size; i < _i; i++) {
         for (var j = 0, _j = board.get(i).size; j < _j; j++) {
-            if (board.getIn([i, j]) === PIECE) {
-                var possibleDirection = getPossibleDirection(board, j, i);
-                for (var d of ['left','right','up','down']) {
-                    if (possibleDirection[d]) {
-                        var res = solve(move(board, j, i, d), piece - 1);
-                        if (!Immutable.List.isList(res)) {
-                            // succeeded
-                            res.push(['('+j+', '+i+')', d]);
-                            return res;
-                        } 
-                    }
+            if (board.getIn([i, j]) !== PIECE) {
+                continue;
+            }
+            var possibleDirection = getPossibleDirection(board, j, i);
+            var directions = ['left', 'right', 'up', 'down'];
+            for (var d = 0, _d = directions.length; d < _d; d++) {
+                if (!possibleDirection[directions[d]]) {
+                    continue;
+                }
+                var res = solve(move(board, j, i, directions[d]), piece - 1);
+                if (!Immutable.List.isList(res)) {
+                    // succeeded
+                    res.push(['(' + j + ', ' + i + ')', directions[d]]);
+                    return res;
                 }
             }
         }
@@ -58,18 +61,22 @@ function getPossibleDirection(board, a, b) {
     if (board.getIn([b, a]) !== PIECE) return possibleDirection;
     var width = board.get(0).size;
     var height = board.size;
-    if (a - 2 >= 0 && board.getIn([b, a - 1]) === PIECE && board.getIn([b, a - 2]) === EMPTY) {
+    if (a - 2 >= 0 &&
+        board.getIn([b, a - 1]) === PIECE && board.getIn([b, a - 2]) === EMPTY)
          possibleDirection.left = true;
-    }
-    if (a + 2 < width && board.getIn([b, a + 1]) === PIECE && board.getIn([b, a + 2]) === EMPTY) {
+
+    if (a + 2 < width &&
+        board.getIn([b, a + 1]) === PIECE && board.getIn([b, a + 2]) === EMPTY)
          possibleDirection.right = true;
-    }
-    if (b - 2 >= 0 && board.getIn([b - 1, a]) === PIECE && board.getIn([b - 2, a]) === EMPTY) {
+
+    if (b - 2 >= 0 &&
+        board.getIn([b - 1, a]) === PIECE && board.getIn([b - 2, a]) === EMPTY)
          possibleDirection.up = true;
-    }
-    if (b + 2 < height && board.getIn([b + 1, a]) === PIECE && board.getIn([b + 2, a]) === EMPTY) {
+
+    if (b + 2 < height &&
+        board.getIn([b + 1, a]) === PIECE && board.getIn([b + 2, a]) === EMPTY)
          possibleDirection.down = true;
-    }
+
     return possibleDirection;
 }
 function move(board, a, b, direction) {
