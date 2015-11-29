@@ -26,10 +26,8 @@ gameStatus = dig(gameStatus, 3, 3);
 console.log(solve(gameStatus, getPieces(gameStatus)));
 function solve(board, piece) {
     if (piece === 1) {
-        console.log(showBoard(board));
         return [];
     }
-    console.log(piece);
     var status = board;
     for (var i = 0, _i = board.size; i < _i; i++) {
         for (var j = 0, _j = board.get(i).size; j < _j; j++) {
