@@ -3,7 +3,7 @@ var NONE = 0;
 var PIECE = 1;
 var EMPTY = 2;
 
-var mainBoard = Immutable.fromJS([
+var englishBoard = Immutable.fromJS([
     [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
     [NONE, NONE, PIECE, PIECE, PIECE, NONE, NONE],
     [PIECE, PIECE, PIECE, PIECE, PIECE, PIECE, PIECE],
