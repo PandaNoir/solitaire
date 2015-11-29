@@ -29,14 +29,14 @@ function solve(board, piece) {
         return [];
     }
     var status = board;
-    for (var i = 0, _i = board.size; i < _i; i++) {
-        for (var j = 0, _j = board.get(i).size; j < _j; j++) {
+    for (var i = 0, _i = board.size; i < _i; i = 0 | i + 1) {
+        for (var j = 0, _j = board.get(i).size; j < _j; j = 0 | j + 1) {
             if (board.getIn([i, j]) !== PIECE) {
                 continue;
             }
             var possibleDirection = getPossibleDirection(board, j, i);
             var directions = ['left', 'right', 'up', 'down'];
-            for (var d = 0, _d = directions.length; d < _d; d++) {
+            for (var d = 0, _d = directions.length; d < _d; d = 0 | d + 1) {
                 if (!possibleDirection[directions[d]]) {
                     continue;
                 }
@@ -107,9 +107,9 @@ function dig(board, a, b) {
 }
 function getPieces(board) {
     var piece = 0;
-    for (var i = 0, _i = board.size; i < _i; i++) {
-        for (var j = 0, _j = board.get(i).size; j < _j; j++) {
-            if (board.getIn([i, j]) === PIECE) piece++;
+    for (var i = 0, _i = board.size; i < _i; i = 0 | i + 1) {
+        for (var j = 0, _j = board.get(i).size; j < _j; j = 0 | j + 1) {
+            if (board.getIn([i, j]) === PIECE) piece = 0 | piece + 1;
         }
     }
     return piece;
@@ -117,8 +117,8 @@ function getPieces(board) {
 function showBoard(board) {
     var res = '';
     var status = [' ■', ' O', '  '];
-    for (var i = 0, _i = board.size; i < _i; i++) {
-        for (var j = 0, _j = board.get(i).size; j < _j; j++) {
+    for (var i = 0, _i = board.size; i < _i; i = 0 | i + 1) {
+        for (var j = 0, _j = board.get(i).size; j < _j; j = 0 | j + 1) {
             res += status[board.getIn([i, j])];
         }
         res += '\n';
